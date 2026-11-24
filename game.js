@@ -316,7 +316,7 @@ function getLevel(number) {
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
-const GAME_VERSION = "3.53-international.2";
+const GAME_VERSION = "3.53-international.3";
 const CAMPAIGN_LEVEL_KEY = "bp_campaign_progress";
 const RANDOM_LEVEL_KEY = "bp_campaign_completed_random_level";
 const COMPLETED_LEVELS_KEY = "bp_campaign_release_completed";
@@ -2480,7 +2480,7 @@ function finishReleaseStartup() {
   startupPending = false;
   document.getElementById("homeScreen").removeAttribute("aria-busy");
   document.documentElement.classList.remove("release-starting");
-  document.getElementById("port-loader")?.remove();
+  document.getElementById("releaseLoading").remove();
   if (!readyReported) {
     readyReported = true;
     platform.ready();

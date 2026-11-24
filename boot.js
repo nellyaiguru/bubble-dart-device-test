@@ -175,36 +175,46 @@ async function startBubbleDart() {
   } catch {
     // A blocked or failed SDK leaves the session playable.
   }
+  const assetUrl = name => `${name}?v=${encodeURIComponent(config.version)}`;
   const loadScene = async () => {
-    const response = await fetch("scene.html");
+    const response = await fetch(assetUrl("scene.html"));
     if (!response.ok) throw new Error("Game assets unavailable");
-    document.body.insertAdjacentHTML("beforeend", await response.text());
+    return response.text();
   };
   const stylesheet = new Promise((resolve, reject) => {
     const link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = "game.css";
+    link.href = assetUrl("game.css");
     link.onload = resolve;
     link.onerror = reject;
     document.head.append(link);
   });
   const game = document.createElement("script");
-  game.src = "game.js";
+  game.src = assetUrl("game.js");
   // Start downloading the shared code while the scene and save are loaded.
   const preload = document.createElement("link");
   preload.rel = "preload";
   preload.as = "script";
   preload.href = game.src;
   document.head.append(preload);
-  await Promise.all([loadScene(), stylesheet, loadGameSave()]);
-  document.body.append(game);
+  const [scene] = await Promise.all([loadScene(), stylesheet, loadGameSave()]);
+  document.body.insertAdjacentHTML("beforeend", scene);
+  await new Promise((resolve, reject) => {
+    game.onload = resolve;
+    game.onerror = reject;
+    document.body.append(game);
+  });
 }
 
 startBubbleDart().catch(() => {
+  const loading = document.getElementById("releaseLoading");
+  loading.removeAttribute("role");
+  loading.removeAttribute("aria-label");
+  loading.dataset.loadFailed = "";
   const retry = document.createElement("button");
   retry.type = "button";
   retry.textContent = "↻";
   retry.setAttribute("aria-label", "Reload");
   retry.addEventListener("click", () => location.reload());
-  document.getElementById("port-loader").replaceChildren(retry);
+  loading.replaceChildren(retry);
 });

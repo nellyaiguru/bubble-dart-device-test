@@ -3348,22 +3348,6 @@ html.release-starting #gameScreen { display: none !important; }
 html.release-starting #homeScreen { display: grid; overflow: hidden; }
 html.release-starting #homeScreen :is(.hp-toolbar, #homeChestButton, .hp-rays) { display: none; }
 html.release-starting #homeContinue { visibility: hidden; }
-#releaseLoading {
-  display: none; position: absolute; inset: 50% auto auto 50%; translate: -50% -50%;
-  width: min(95%, 340px); height: clamp(12px, 2.8dvh, 20px);
-  box-sizing: border-box; border: 2px solid #fff0c3; border-radius: 999px;
-  background: #784b2d; overflow: hidden; box-shadow: 0 2px 0 #b1622d80;
-}
-html.release-starting #releaseLoading { display: block; }
-#releaseLoading::before {
-  content: ""; display: block; width: 88%; height: 100%; border-radius: inherit;
-  background: linear-gradient(#fff79c, #ffda5b 48%, #ffac2f);
-  transform-origin: left; animation: release-progress 4s cubic-bezier(.12,.65,.27,1) both;
-}
-@keyframes release-progress { from { transform: scaleX(.1); } to { transform: scaleX(1); } }
-@media (prefers-reduced-motion: reduce) {
-  #releaseLoading::before { animation: none; width: 55%; }
-}
 #board, #board .cell, #gameScreen .game-header { user-select: none; -webkit-touch-callout: none; }
 
 body {
@@ -3374,20 +3358,6 @@ body {
 }
 input, textarea { user-select: text; -webkit-user-select: text; }
 button { touch-action: manipulation; }
-#port-loader {
-  position: fixed; inset: 0; z-index: 48; display: grid; place-content: center;
-  background: #52c9e7; color: #563567;
-}
-#port-loader > span {
-  display: block; width: 100px; height: 12px; border-radius: 14px;
-  background: #fff4db; overflow: hidden;
-}
-#port-loader > span::before {
-  content: ""; display: block; width: 48%; height: 100%; border-radius: inherit;
-  background: #ffb52f; animation: port-load 1s ease-in-out infinite alternate;
-}
-@keyframes port-load { to { transform: translateX(110%); } }
-@media (prefers-reduced-motion: reduce) { #port-loader > span::before { animation: none; } }
 .port-language-options {
   display: grid !important; grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: .45em; width: 100%; min-height: 0; max-height: min(38dvh, 335px);
@@ -3417,6 +3387,7 @@ button { touch-action: manipulation; }
 }
 .port-ui-label { overflow-wrap: anywhere; }
 #homeLevelLabel, #languageCurrent { white-space: normal; }
+.hp-level-label { font-family: "BubbleNunito", var(--port-cjk, system-ui), system-ui, sans-serif; }
 .bp-confirm, #soundToggle, #languageOpenButton { white-space: normal; overflow-wrap: anywhere; }
 @media (max-height: 500px) and (orientation: landscape) {
   #languageOverlay .bp-panel { max-height: 86dvh; overflow: auto; }

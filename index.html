@@ -1,14 +1,52 @@
 <!doctype html>
-<html lang="en" class="release-starting">
+<html lang="en" class="release-starting" translate="no">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="google" content="notranslate">
 <meta name="robots" content="noindex">
 <title>Bubble Dart</title>
 
-<script defer src="config.js"></script>
-<script defer src="boot.js"></script>
-<style>html,body{margin:0;min-height:100%;background:#52c9e7}#port-loader{display:grid;place-content:center;position:fixed;inset:0}</style>
+<script defer src="config.js?v=3.53-international.3"></script>
+<script defer src="boot.js?v=3.53-international.3"></script>
+<style>html, body { margin: 0; min-height: 100%; background: #52c9e7; }
+
+#releaseLoading {
+  position: fixed; z-index: 51; inset: 85dvh auto auto 50%; translate: -50% -50%;
+  width: min(72vw, 43dvh, 340px); height: clamp(12px, 2.8dvh, 20px);
+  box-sizing: border-box; border: 2px solid #fff0c3; border-radius: 999px;
+  background: #784b2d; overflow: hidden; box-shadow: 0 2px 0 #b1622d80;
+}
+
+@media (orientation: landscape) {
+  #releaseLoading {
+    top: 74dvh;
+    left: calc(50% + min(24vw, 43.2dvh, 302px));
+    width: min(34vw, 62dvh, 340px);
+  }
+}
+
+#releaseLoading:not([data-load-failed])::before {
+  content: ""; display: block; width: 88%; height: 100%; border-radius: inherit;
+  background: linear-gradient(#fff79c, #ffda5b 48%, #ffac2f);
+  transform-origin: left; animation: release-progress 4s cubic-bezier(.12,.65,.27,1) both;
+}
+
+@keyframes release-progress { from { transform: scaleX(.1); } to { transform: scaleX(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  #releaseLoading:not([data-load-failed])::before { animation: none; width: 55%; }
+}
+
+#releaseLoading[data-load-failed] {
+  display: grid; place-items: center; width: auto; height: auto;
+  background: #fff4db; border: 0; box-shadow: none;
+}
+
+#releaseLoading button {
+  width: 48px; height: 48px; border: 0; background: transparent;
+  color: #563567; font: 700 28px system-ui, sans-serif; cursor: pointer;
+}</style>
 </head>
-<body><div id="port-loader" role="status"><span></span></div></body>
+<body><div id="releaseLoading" role="status" aria-label="Loading game" data-l10n-label="loading"></div></body>
 </html>

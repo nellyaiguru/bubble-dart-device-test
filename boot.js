@@ -169,6 +169,17 @@ document.addEventListener("visibilitychange", () => {
   if (document.hidden) void flushGameSave();
 });
 ;
+function localeFor(value) {
+  const primary = String(value ?? "").toLowerCase().split(/[-_]/)[0];
+  if (primary === "pt") return "pt-BR";
+  if (primary === "zh") return "zh-CN";
+  return Object.hasOwn(config.loadingCopy, primary) ? primary : "en";
+}
+
+function startupLocale() {
+  return localeFor(gameStorage.getItem("bp_lang") || platform.language || navigator.language);
+}
+
 async function startBubbleDart() {
   try {
     await platform.init();
@@ -198,6 +209,9 @@ async function startBubbleDart() {
   preload.href = game.src;
   document.head.append(preload);
   const [scene] = await Promise.all([loadScene(), stylesheet, loadGameSave()]);
+  const locale = startupLocale();
+  document.documentElement.lang = locale;
+  document.getElementById("releaseLoading").setAttribute("aria-label", config.loadingCopy[locale].loading);
   document.body.insertAdjacentHTML("beforeend", scene);
   await new Promise((resolve, reject) => {
     game.onload = resolve;
@@ -206,15 +220,18 @@ async function startBubbleDart() {
   });
 }
 
-startBubbleDart().catch(() => {
+function showStartupRetry() {
   const loading = document.getElementById("releaseLoading");
+  document.getElementById("releaseSplash").classList.add("splash-ready");
   loading.removeAttribute("role");
   loading.removeAttribute("aria-label");
   loading.dataset.loadFailed = "";
   const retry = document.createElement("button");
   retry.type = "button";
   retry.textContent = "↻";
-  retry.setAttribute("aria-label", "Reload");
+  retry.setAttribute("aria-label", config.loadingCopy[startupLocale()].reloadGame);
   retry.addEventListener("click", () => location.reload());
   loading.replaceChildren(retry);
-});
+}
+
+startBubbleDart().catch(showStartupRetry);

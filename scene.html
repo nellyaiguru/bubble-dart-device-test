@@ -1,0 +1,334 @@
+
+
+<section id="homeScreen" class="hp-home" aria-label="Bubble Dart" aria-busy="true" hidden>
+  <div class="hp-stage">
+    <div class="hp-art">
+      <div class="hp-action" aria-hidden="true">
+        <img class="hp-piece hp-piece--kitten" src="assets/792f3e0cb3e3b1d47eefc02c.webp" width="2305" height="2077" style="--sprite-x:1.17111256%; --sprite-y:16.26434507%; --sprite-width:74.98373455%" alt="" draggable="false">
+        <img class="hp-piece hp-piece--strike-purple" src="assets/339a28e32fb16f570920fed0.webp" width="2597" height="1936" style="--sprite-x:13.14248536%; --sprite-y:8.74554808%; --sprite-width:84.48275862%" alt="" draggable="false">
+        <img class="hp-piece hp-piece--arrow" src="assets/1dbd0472a7b9a3325f2bbcf5.webp" width="844" height="498" style="--sprite-x:48.30839297%; --sprite-y:31.65809260%; --sprite-width:27.45608328%" alt="" draggable="false">
+        <img class="hp-piece hp-piece--ball-blue" src="assets/0ea1d004b96de0492dad92a1.webp" width="336" height="341" style="--sprite-x:7.80741705%; --sprite-y:19.98417095%; --sprite-width:10.93038386%" alt="" draggable="false">
+        <img class="hp-piece hp-piece--ball-yellow" src="assets/c5fdcd14e468ebb6ef61e0d6.webp" width="251" height="252" style="--sprite-x:30.51398829%; --sprite-y:5.97546498%; --sprite-width:8.16525699%" alt="" draggable="false">
+        <img class="hp-piece hp-piece--ball-pink" src="assets/281686e4dd9f12de75e6dad1.webp" width="291" height="294" style="--sprite-x:58.03513338%; --sprite-y:1.82034032%; --sprite-width:9.46649317%" alt="" draggable="false">
+        <img class="hp-piece hp-piece--ball-green" src="assets/1dde83bf6f6fd89e05b29deb.webp" width="212" height="215" style="--sprite-x:91.60702668%; --sprite-y:41.90740008%; --sprite-width:6.89655172%" alt="" draggable="false">
+        <img class="hp-piece hp-piece--ball-orange" src="assets/a9259f4f9aaaeb1e2bb8d6ff.webp" width="172" height="173" style="--sprite-x:18.37996096%; --sprite-y:86.66402849%; --sprite-width:5.59531555%" alt="" draggable="false">
+        <img class="hp-piece hp-piece--ball-turquoise" src="assets/0c1cc3dca56c9cd178c71d52.webp" width="404" height="407" style="--sprite-x:56.79895901%; --sprite-y:69.25207756%; --sprite-width:13.14248536%" alt="" draggable="false">
+      </div>
+      <img class="hp-logo" src="assets/d6628c3a3ce72ae148b02c30.webp" width="1560" height="1008" alt="Bubble Dart">
+    </div>
+    <div class="hp-toolbar">
+      <button id="homeProfileButton" type="button" aria-haspopup="dialog"
+      aria-controls="profileOverlay" aria-label="Профиль" title="Профиль"><span id="homeProfileBadge" class="profile-badge" aria-hidden="true"><span class="profile-badge-mask"><img alt="" draggable="false"></span>
+    <img class="profile-badge-frame" alt="" draggable="false"></span></button>
+      <button id="homeSettingsButton" class="hp-settings settings-trigger" type="button" onclick="openSettings()"
+      aria-haspopup="dialog" aria-controls="settingsOverlay" aria-label="" data-l10n-label="settingsLabel" title="Настройки">
+      <img src="assets/a4470adf59cbbb919cbd9297.png" width="131" height="131" alt="">
+    </button>
+    </div>
+    <button id="homeChestButton" class="game-skin bp-cream" type="button"
+      aria-haspopup="dialog" aria-controls="chestDialog" aria-label="Сундуки">
+      <img src="assets/74a7cb6e20794e8a2178419e.webp" alt="" draggable="false">
+      <span id="homeChestCount" class="hint-count" aria-hidden="true" hidden></span>
+    </button>
+    <div class="hp-cta">
+      <img class="hp-rays hp-rays-left" src="assets/9768b7a80cbcc47a1558fbe3.png" alt="" aria-hidden="true">
+      <img class="hp-rays hp-rays-right" src="assets/b662680076509377ff08beab.png" alt="" aria-hidden="true">
+      <div id="releaseLoading" role="status" aria-label="" data-l10n-label="loading"></div>
+      <button id="homeContinue" class="hp-play" type="button" onclick="resumeFromHome()">
+        <span class="hp-play-skin" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span id="homeLevelLabel" class="hp-level-label">Уровень 1</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<main class="app" id="gameScreen" hidden>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <radialGradient id="life-fill" cx="32%" cy="24%" r="83%">
+        <stop stop-color="#ffabab"/>
+        <stop offset=".36" stop-color="#ff6079"/>
+        <stop offset=".73" stop-color="#f22955"/>
+        <stop offset="1" stop-color="#b6083d"/>
+      </radialGradient>
+      <linearGradient id="life-rim" x2=".18" y2="1">
+        <stop stop-color="#fff1d9"/>
+        <stop offset=".46" stop-color="#ffb7ae"/>
+        <stop offset="1" stop-color="#e4466c"/>
+      </linearGradient>
+<symbol id="bonus-heart" viewBox="0 1 60 60">
+  <defs>
+    <radialGradient id="bonus-heart-gold" cx=".29" cy=".19" r=".89">
+      <stop stop-color="#fff7aa"/><stop offset=".5" stop-color="#ffd940"/>
+      <stop offset="1" stop-color="#e38a0b"/>
+    </radialGradient>
+    <linearGradient id="bonus-heart-edge" x2="0" y2="1">
+      <stop stop-color="#fff3a2"/><stop offset="1" stop-color="#c7790b"/>
+    </linearGradient>
+  </defs>
+  <path d="M30 54C25 51 4 36 4 21A14 14 0 0 1 30 14 14 14 0 0 1 56 21C56 36 35 51 30 54Z"
+    fill="url(#bonus-heart-gold)" stroke="url(#bonus-heart-edge)" stroke-width="2" stroke-linejoin="round"/>
+  <path d="M10 22C10 16 14 12 19 12" fill="none" stroke="#fffdf1" stroke-width="3.7" stroke-linecap="round"/>
+  <path d="M36 13Q44 10 49 16M31 49Q48 37 51 25" fill="none" stroke="#fff0a6" stroke-width="2.4" stroke-linecap="round"/>
+</symbol>
+      <symbol id="life-heart" viewBox="0 1 60 60">
+        <path d="M30 54C25 51 4 36 4 21A14 14 0 0 1 30 14 14 14 0 0 1 56 21C56 36 35 51 30 54Z"
+          fill="url(#life-fill)" stroke="url(#life-rim)" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M10 22C10 16 14 12 19 12" fill="none" stroke="#fff6e7" stroke-width="3.7" stroke-linecap="round"/>
+        <path d="M36 13Q44 10 49 16" fill="none" stroke="#ffd3c3" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M31 49Q48 37 51 25" fill="none" stroke="#ff8895" stroke-opacity=".74" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+    </defs>
+  </svg>
+  <div class="play-layout">
+  <header class="game-header" aria-label="" data-l10n-label="gameHud">
+    <div class="header-side header-side-left">
+      <button class="game-icon game-skin bp-cream" id="homeButton" title="На главный экран" aria-label="На главный экран" onclick="goHome()">
+        <svg viewBox="0 0 48 48" class="ui-icon" aria-hidden="true">
+          <defs>
+            <linearGradient id="home-icon-fill" x2="0" y2="1">
+              <stop stop-color="#ff9a67"/>
+              <stop offset=".55" stop-color="#ed653b"/>
+              <stop offset="1" stop-color="#d7482b"/>
+            </linearGradient>
+          </defs>
+          <path d="M5 23 21.6 8a3.5 3.5 0 0 1 4.8 0L43 23a3 3 0 0 1-4 4.5l-1.3-1.1V37a3.5 3.5 0 0 1-3.5 3.5H29v-9a2 2 0 0 0-2-2h-6a2 2 0 0 0-2 2v9h-5.2a3.5 3.5 0 0 1-3.5-3.5V26.4L9 27.5A3 3 0 0 1 5 23Z"
+            fill="url(#home-icon-fill)" stroke="#fff5db" stroke-width="1.6" stroke-linejoin="round"/>
+          <path d="M9 22 22.5 10.2a2 2 0 0 1 2.6 0l4.1 3.7" fill="none" stroke="#ffe4b7"
+            stroke-width="1.8" stroke-linecap="round" opacity=".86"/>
+        </svg>
+        <span id="gameChestCount" class="hint-count" aria-hidden="true" hidden></span>
+      </button>
+    </div>
+    <div class="game-header-center">
+      <h1 class="level-plaque" id="level" aria-label="Уровень 1">
+        <span class="hp-play-skin" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span id="gameLevelLabel" class="hp-level-label">Уровень 1</span>
+      </h1>
+      <div class="hearts game-skin bp-cream" id="hearts" role="img" aria-label="Осталось жизней: 3"></div>
+    </div>
+    <div class="header-side header-side-right">
+      <button class="game-icon settings-trigger" id="settingsButton" type="button" aria-haspopup="dialog" aria-controls="settingsOverlay" title="Настройки" aria-label="" data-l10n-label="settingsLabel" onclick="openSettings()">
+        <img src="assets/a4470adf59cbbb919cbd9297.png" width="131" height="131" alt="">
+      </button>
+    </div>
+  </header>
+
+  <div class="play-field-region">
+    <div class="play-field">
+      <div class="play-area">
+        <div class="board-wrap">
+          <div id="invalidToast" data-l10n="invalid" class="invalid-toast" aria-hidden="true">Неправильный ход</div>
+          <div id="board" aria-label="" data-l10n-label="gameBoard"></div>
+          <svg id="routePreview" aria-hidden="true" hidden></svg>
+          <div id="fxLayer" aria-hidden="true"></div>
+        </div>
+      </div>
+      <div id="message" role="status" aria-live="polite" class="visually-hidden">Выбери цветную стрелку, чтобы сделать ход</div>
+
+      <div class="controls hint-controls">
+        <button class="hint-button game-skin bp-cream" id="hintButton" onclick="hint()" aria-label="Получить подсказку" title="Подсказка">
+          <svg class="bulb-svg" viewBox="0 0 64 74" aria-hidden="true">
+            <defs><radialGradient id="bulb-glow" cx="35%" cy="25%"><stop offset="0" stop-color="#fff9bf"/><stop offset=".6" stop-color="#ffe044"/><stop offset="1" stop-color="#ffb61e"/></radialGradient></defs>
+            <path d="M18 45C13 39 10 33 10 26a22 22 0 0 1 44 0c0 8-4 14-9 20-2 3-3 6-3 10H22c0-4-1-8-4-11z" fill="url(#bulb-glow)" stroke="#e5a31b" stroke-width="2"/>
+            <path d="M20 21c2-9 9-13 16-12" stroke="white" stroke-width="5" stroke-linecap="round" opacity=".9"/>
+            <rect x="21" y="54" width="22" height="8" rx="3" fill="#56c8f5" stroke="#178bc6" stroke-width="1.5"/>
+            <rect x="24" y="61" width="16" height="7" rx="3" fill="#2489d4"/>
+          </svg>
+          <span class="hint-count" id="hints" aria-hidden="true">
+            <span class="hint-stock">3</span>
+            <span class="hint-ad-offer">
+              <svg class="hint-ad-icon" viewBox="0 0 16 16" focusable="false">
+                <rect x="1" y="2.5" width="14" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M6 5.25 11 8 6 10.75Z" fill="currentColor"/>
+              </svg>
+              <span class="hint-ad-label">Реклама +1</span>
+            </span>
+          </span>
+        </button>
+        <button class="hint-button game-skin bp-cream bonus-button" id="spareHeartButton" type="button" aria-label="Запасная жизнь">
+          <svg class="bonus-icon bonus-heart-icon" viewBox="0 1 60 60" aria-hidden="true">
+            <use href="#bonus-heart"></use>
+          </svg>
+          <span class="hint-count" aria-hidden="true"></span>
+        </button>
+        <button class="hint-button game-skin bp-cream bonus-button" id="routeBonusButton" type="button" aria-label="Подсказка маршрута" aria-pressed="false">
+          <svg class="bonus-icon bonus-route-icon" viewBox="0 0 64 54" aria-hidden="true">
+            <defs>
+              <linearGradient id="bonus-route-teal" x2="0" y2="1">
+                <stop stop-color="#37cabb"/><stop offset="1" stop-color="#007369"/>
+              </linearGradient>
+            </defs>
+            <g fill="url(#bonus-route-teal)" stroke="#007b70" stroke-width="1.25">
+              <circle cx="9" cy="45" r="4.1"/><circle cx="9" cy="34" r="4.1"/>
+              <circle cx="9" cy="23" r="4.1"/><circle cx="9" cy="12" r="4.1"/>
+              <circle cx="20" cy="12" r="4.1"/><circle cx="31" cy="12" r="4.1"/>
+              <circle cx="42" cy="12" r="4.1"/>
+              <path d="M51 3Q51 1 53 3L62 11Q63 12 62 13L53 21Q51 23 51 21Z"/>
+            </g>
+          </svg>
+          <span class="hint-count" aria-hidden="true"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <div id="gameTutorial" class="game-tutorial" hidden>
+    <svg class="tutorial-paw" viewBox="65 113 438 318" aria-hidden="true">
+      <defs>
+        <clipPath id="tutorial-paw-crop">
+          <path d="M491 202L479 188L467 180L446 173L401 169L379 164L335 163L323 144L312 133L290 121L262 117L246 119L232 124L208 140L206 144L201 146L176 168L140 224L135 224L130 218L110 209L102 210L96 215L89 228L85 244L75 259L69 285L69 296L76 306L90 313L90 318L80 336L84 357L100 383L116 399L134 412L152 418L159 418L164 423L177 415L206 406L220 406L234 414L266 424L294 425L310 422L338 407L350 395L357 383L364 357L360 336L371 323L377 304L375 277L387 276L413 280L444 281L460 277L477 269L490 255L496 239L498 224Z"/>
+        </clipPath>
+      </defs>
+      <image width="579" height="522" href="assets/04e67ec7e84698cab46dbc81.jpg" clip-path="url(#tutorial-paw-crop)"/>
+    </svg>
+    <div class="tutorial-card">
+      <p id="tutorialCopy" aria-live="polite"></p>
+      <button id="tutorialOkay" type="button" hidden></button>
+    </div>
+  </div>
+</main>
+
+<dialog id="profileOverlay" class="bp-screen" aria-labelledby="profileTitle">
+ <button id="profileClose" class="bp-dismiss" type="button" aria-label="" data-l10n-label="close"><img src="assets/047444f070db5a4ca98dee8e.svg" alt=""></button>
+ <div class="bp-stage">
+  <img class="bp-logo" alt="Bubble Dart" width="1560" height="1008" draggable="false">
+  <div class="bp-dialog">
+   <form id="profileForm" class="bp-panel profile-panel">
+    <h2 id="profileTitle" class="bp-pill bp-pink bp-title profile-title">Профиль</h2>
+    <div class="profile-identity">
+     <span id="profilePreview" class="profile-badge" aria-hidden="true"><span class="profile-badge-mask"><img alt="" draggable="false"></span>
+    <img class="profile-badge-frame" alt="" draggable="false"></span>
+     <div class="profile-name-field">
+      <label id="profileNameLabel" class="bp-sr" for="profileName">Имя игрока</label>
+      <input id="profileName" type="text" maxlength="24" autocomplete="off" autocapitalize="words"
+        enterkeyhint="done" placeholder="Игрок" dir="auto">
+      <button id="profileEditName" class="profile-edit-name" type="button" aria-label="Изменить имя">
+       <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor"
+        d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/></svg>
+      </button>
+     </div>
+    </div>
+    <div class="profile-tabs" role="tablist" aria-labelledby="profileTitle">
+     <button id="profileAvatarTab" class="bp-pill bp-pink" type="button" role="tab"
+       aria-controls="profileAvatarPanel" aria-selected="true">Аватар</button>
+     <button id="profileFrameTab" class="bp-pill bp-cream" type="button" role="tab"
+       aria-controls="profileFramePanel" aria-selected="false" tabindex="-1">Рамка</button>
+    </div>
+    <div id="profileAvatarPanel" role="tabpanel" aria-labelledby="profileAvatarTab">
+     <div id="profileAvatars" class="profile-options"></div>
+    </div>
+    <div id="profileFramePanel" role="tabpanel" aria-labelledby="profileFrameTab" hidden>
+     <div id="profileFrames" class="profile-options"></div>
+    </div>
+    <div class="profile-footer">
+     <div id="profilePages" class="profile-pages" hidden>
+      <button id="profilePrevious" class="bp-pill bp-cream" type="button" aria-label="Предыдущая страница">‹</button>
+      <span id="profilePage" aria-live="polite"></span>
+      <button id="profileNext" class="bp-pill bp-cream" type="button" aria-label="Следующая страница">›</button>
+     </div>
+     <button id="profileDone" class="bp-pill bp-green bp-confirm profile-save" type="submit">Готово</button>
+    </div>
+   </form>
+  </div>
+ </div>
+</dialog>
+<dialog id="avatarPurchaseDialog" class="bp-screen" aria-labelledby="avatarPurchaseTitle">
+ <div class="bp-dialog">
+  <div class="bp-panel avatar-purchase-panel">
+   <h2 id="avatarPurchaseTitle"></h2>
+   <img id="avatarPurchasePortrait" alt="" width="128" height="128">
+   <p id="avatarPurchaseMessage" role="status"></p>
+   <button id="avatarPurchaseBuy" class="bp-pill bp-green bp-confirm" type="button" hidden>
+    <span></span><span id="avatarPurchasePrice"></span><img id="avatarPurchaseCurrency" alt="" hidden>
+   </button>
+   <button id="avatarPurchaseClose" class="bp-pill bp-cream" type="button">Закрыть</button>
+  </div>
+ </div>
+</dialog>
+<dialog id="chestDialog" class="bp-screen" aria-labelledby="chestTitle">
+ <button id="chestClose" class="bp-dismiss" type="button" aria-label="" data-l10n-label="close"><img src="assets/047444f070db5a4ca98dee8e.svg" alt=""></button>
+ <div class="bp-dialog chest-layout">
+  <div class="bp-panel chest-panel">
+   <h2 id="chestTitle" class="bp-pill bp-pink bp-title chest-title">Сундуки</h2>
+   <div class="chest-art" aria-hidden="true">
+    <img data-for="earned" src="assets/74a7cb6e20794e8a2178419e.webp" alt="">
+    <img data-for="reward" src="assets/cd9d57e9663a91468639820b.webp" alt="">
+    <img data-for="empty" src="assets/2ef489e37784a57d0c852a18.webp" alt="">
+    <div id="chestPrize" hidden></div>
+   </div>
+   <p id="chestCopy"></p>
+   <p id="chestProgress"></p>
+   <button id="chestAction" class="bp-pill bp-green bp-confirm chest-action" type="button">Готово</button>
+  </div>
+ </div>
+</dialog>
+<dialog id="campaignFinale" class="bp-screen" aria-labelledby="finaleTitle">
+ <div class="bp-dialog finale-layout">
+  <div class="bp-panel finale-panel">
+   <h2 id="finaleTitle" class="bp-pill bp-pink bp-title finale-title">100 уровней пройдено!</h2>
+   <img class="finale-art" src="assets/8fc4f6679d91dc55302e4882.webp" alt="" draggable="false">
+   <div class="finale-actions">
+    <p id="finaleInvite" class="finale-copy">Оцените игру и ждите новых уровней!</p>
+    <p id="finaleReplay" class="finale-copy">А пока сыграйте в случайные уровни.</p>
+    <button id="finaleRate" class="bp-pill bp-cream finale-button" type="button" hidden>Оценить игру</button>
+    <p id="finaleReviewNote" class="finale-copy" role="status" hidden></p>
+    <button id="finaleContinue" class="bp-pill bp-green bp-confirm finale-button" type="button">Играть случайные уровни</button>
+   </div>
+  </div>
+ </div>
+</dialog>
+<div class="settings-overlay bp-screen" id="settingsOverlay" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" hidden>
+ <button id="settingsClose" class="bp-dismiss" type="button" onclick="closeSettings()" aria-label="" data-l10n-label="close"><img src="assets/047444f070db5a4ca98dee8e.svg" width="72" height="74" alt=""></button>
+ <div class="bp-stage"><img class="bp-logo" alt="Bubble Dart" width="1560" height="1008" draggable="false"><div class="bp-dialog"><div class="bp-panel bp-settings-panel">
+  <h2 class="bp-pill bp-pink bp-title" id="settingsTitle" data-l10n="settings">Настройки</h2>
+  <div class="bp-field"><span class="bp-field-label" id="soundSectionLabel"><span id="soundSectionText" data-l10n="sound">Звук</span></span><button class="bp-pill bp-cream" id="soundToggle" type="button" onclick="toggleSound()" aria-pressed="true">Звук: вкл</button></div>
+  <button class="bp-pill bp-cream" id="languageOpenButton" type="button" aria-haspopup="dialog" aria-controls="languageOverlay" onclick="openLanguageDialog()"><span id="languageLabel" data-l10n="language">Язык</span><span aria-hidden="true">&nbsp;·&nbsp;</span><span id="languageCurrent">Русский</span></button>
+  <button class="bp-pill bp-green bp-confirm" id="settingsDone" data-l10n="done" type="button" onclick="closeSettings()"></button>
+ </div></div></div>
+</div>
+<div class="language-overlay bp-screen" id="languageOverlay" role="dialog" aria-modal="true" aria-labelledby="languageDialogTitle" aria-describedby="languageDialogSubtitle" hidden>
+ <button id="languageBackButton" class="bp-dismiss" type="button" onclick="closeLanguageDialog()" aria-label="" data-l10n-label="close"><img src="assets/047444f070db5a4ca98dee8e.svg" width="72" height="74" alt=""></button>
+ <div class="bp-stage"><img class="bp-logo" alt="Bubble Dart" width="1560" height="1008" draggable="false"><div class="bp-dialog" id="languageArtFrame"><div class="bp-panel">
+  <h2 class="bp-pill bp-pink bp-title"><span id="languageDialogTitle">Язык</span></h2>
+  <p id="languageDialogSubtitle" class="bp-sr">Выберите язык игры</p>
+  <div class="bp-options port-language-options" role="radiogroup" aria-labelledby="languageDialogTitle">
+<button class="port-language" type="button" role="radio" lang="en" data-language="en" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">English</button>
+<button class="port-language" type="button" role="radio" lang="ru" data-language="ru" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">Русский</button>
+<button class="port-language" type="button" role="radio" lang="es" data-language="es" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">Español</button>
+<button class="port-language" type="button" role="radio" lang="pt-BR" data-language="pt-BR" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">Português (Brasil)</button>
+<button class="port-language" type="button" role="radio" lang="fr" data-language="fr" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">Français</button>
+<button class="port-language" type="button" role="radio" lang="de" data-language="de" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">Deutsch</button>
+<button class="port-language" type="button" role="radio" lang="tr" data-language="tr" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">Türkçe</button>
+<button class="port-language" type="button" role="radio" lang="id" data-language="id" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">Indonesia</button>
+<button class="port-language" type="button" role="radio" lang="it" data-language="it" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">Italiano</button>
+<button class="port-language" type="button" role="radio" lang="pl" data-language="pl" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">Polski</button>
+<button class="port-language" type="button" role="radio" lang="ja" data-language="ja" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">日本語</button>
+<button class="port-language" type="button" role="radio" lang="ko" data-language="ko" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">한국어</button>
+<button class="port-language" type="button" role="radio" lang="zh-CN" data-language="zh-CN" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)">简体中文</button>
+  </div>
+  <button id="languageConfirm" class="bp-pill bp-green bp-confirm" type="button" onclick="confirmLanguage()"></button>
+ </div></div></div>
+</div>
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="resultTitle">
+  <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
+  <div class="modal" id="resultModal">
+    <h2 id="resultTitle">Молодец!</h2>
+    <img class="victory-pet" id="victoryPet" src="assets/211277c3a5c07167fd58890c.webp" alt="Радостный котёнок">
+    <p id="resultText">Попробуй ещё раз.</p>
+    <button class="action primary game-skin bp-green" id="nextLevelAction" onclick="runNextLevel()"></button>
+    <button class="action primary game-skin bp-green" id="victoryReward" type="button" hidden></button>
+    <p id="victoryRewardMessage" role="status" hidden></p>
+    <button class="action primary game-skin bp-green" id="closeResultAction" onclick="closeOverlay()"></button>
+  </div>
+</div>
+
+
+
+<script type="application/json" id="profileAssets">{"avatars":[{"id":"A1","image":"assets/60d318bf8f443a697c16eb2c.webp"},{"id":"A2","image":"assets/311daed045b0cba4851fb5aa.webp"},{"id":"A3","image":"assets/bc13f1c3dc5b1fab4e12b475.webp"},{"id":"A4","image":"assets/724bf1e1160deefa842c865a.webp"},{"id":"PA1","image":"assets/eac01e7a4e395079beacb6c0.webp"},{"id":"PA2","image":"assets/c61c5cc3e4feb05e2b19c356.webp"},{"id":"PA3","image":"assets/185813b693ffa7c209b825f4.webp"},{"id":"PA4","image":"assets/c3d5cbf8660c5839a550b36c.webp"},{"id":"CA1","image":"assets/04f270c92009d670fbc7c3be.webp"},{"id":"CA2","image":"assets/2f4c05fc94906a7937294b86.webp","name":{"ru":"\u041a\u043e\u0442-\u0444\u043e\u043a\u0443\u0441\u043d\u0438\u043a","en":"Magician cat"}},{"id":"SA1","image":"assets/874a2ca95c80d7029f554949.webp","name":{"ru":"\u041f\u0435\u0441\u0435\u0446","en":"Arctic fox"},"product":"avatar_arctic_fox"},{"id":"SA2","image":"assets/c178b16728bace98c700f433.webp","name":{"ru":"\u0410\u043a\u0441\u043e\u043b\u043e\u0442\u043b\u044c","en":"Axolotl"},"product":"avatar_axolotl"}],"frames":[{"id":"R1","image":"assets/ef2fc76445be9c3e867d0323.webp","mask":"assets/a624ae77241fb140a5094e1e.webp","opening":[14.74,14.162,70.809,71.676]},{"id":"R2","image":"assets/d3d07db24b4ff614ceca1815.webp","mask":"assets/d067fde05bea0ddda2747b0c.webp","opening":[15.072,13.913,70.435,71.884]},{"id":"R3","image":"assets/005f8298bfb891df3ce70891.webp","mask":"assets/beab8636be2becfdba463c80.webp","opening":[14.783,13.913,70.435,71.884]},{"id":"R4","image":"assets/2d736e026d169abfa986d015.webp","mask":"assets/8ac7a65b75944e279b7ce2d8.webp","opening":[14.74,14.162,70.52,71.676]},{"id":"R5","image":"assets/decaa6b183cc839aa0243fd6.webp","mask":"assets/6a753461aee85db86d767ff6.webp","opening":[15.072,13.913,70.435,71.884]},{"id":"R6","image":"assets/0ec5a0335cecd5239aa66bb4.webp","mask":"assets/a3fca93a82b136775a9de305.webp","opening":[14.74,13.873,70.809,71.965]},{"id":"R7","image":"assets/a0cbe206b94a61c7f44c419c.webp","mask":"assets/e2bfe4a58237431bb47d8fed.webp","opening":[15.029,14.162,69.942,71.676]},{"id":"R8","image":"assets/0ac56d75a51f0aa1332ef176.webp","mask":"assets/710bab8c091a5bd8b7894822.webp","opening":[15.029,14.162,70.231,71.965]},{"id":"R9","image":"assets/61c4b43ef1f68bb957a674fc.webp","mask":"assets/26da3c5031b30daa555c4e33.webp","opening":[15.029,13.873,70.231,72.254]},{"id":"R10","image":"assets/d86e5b7cea9d5ad7ccf4add8.webp","mask":"assets/6a400170d0aeb5e7bd4a6182.webp","opening":[14.783,13.623,70.435,72.464]},{"id":"PR1","image":"assets/c43b665e8d51699dda5ab0b8.webp","mask":"assets/b622e2d9d45c0e379934ab13.webp","opening":[19.747,22.025,61.013,61.266]},{"id":"PR2","image":"assets/d790ebdcf3567fb3614d6a00.webp","mask":"assets/7a1ad587c8031d7a4ff33b2f.webp","opening":[19.451,22.195,61.097,61.347]},{"id":"PR3","image":"assets/39e2995f5141c410aa89e326.webp","mask":"assets/e52df915a491c0fcdfb5aa09.webp","opening":[17.848,21.76,64.548,64.303],"product":"frame_rose_gold"},{"id":"PR4","image":"assets/947f24ecfd143382e880557c.webp","mask":"assets/8981b9cf87b7a94a77705641.webp","opening":[17.602,18.367,65.051,65.816],"product":"frame_starry_silver"},{"id":"CF1","image":"assets/7bac8f30890097bc29a3fe74.webp","mask":"assets/edffa3f101407a83cfc1ec6f.webp","opening":[13.821,18.699,72.087,68.835]}]}</script>
+
+
+
+<div id="port-save-status" role="status" hidden></div>

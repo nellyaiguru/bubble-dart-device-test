@@ -1417,7 +1417,7 @@ body.dark * { color-scheme: light; }
 
 
 /* All artwork is independent of copy. No bitmap contains menu text. */
-#languageOverlay.bp-screen,#settingsOverlay.bp-screen{position:fixed!important;inset:0!important;z-index:100;display:flex!important;align-items:center;justify-content:center;overflow:auto!important;overscroll-behavior:contain;padding:max(30px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(30px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))!important;background:transparent!important;backdrop-filter:none;box-sizing:border-box;color:#923f32;font-family:BubbleNunito, var(--port-cjk, sans-serif),'Trebuchet MS',sans-serif;color-scheme:light}
+#languageOverlay.bp-screen,#settingsOverlay.bp-screen{position:fixed!important;inset:0!important;z-index:100;display:flex!important;align-items:center;justify-content:center;overflow:auto!important;overscroll-behavior:contain;padding:max(30px,var(--safe-top)) max(12px,var(--safe-right)) max(30px,var(--safe-bottom)) max(12px,var(--safe-left))!important;background:transparent!important;backdrop-filter:none;box-sizing:border-box;color:#923f32;font-family:BubbleNunito, var(--port-cjk, sans-serif),'Trebuchet MS',sans-serif;color-scheme:light}
 #settingsOverlay.bp-screen{z-index:80}
 #languageOverlay.bp-screen[hidden],#settingsOverlay.bp-screen[hidden]{display:none!important}
 .bp-screen *{box-sizing:border-box}
@@ -1446,7 +1446,7 @@ body.dark * { color-scheme: light; }
 .bp-check{width:12cqw;height:12cqw;flex:none;opacity:0;pointer-events:none}
 .bp-choice.chosen .bp-check{opacity:1}
 .bp-screen .bp-confirm{--cap:12cqw;height:24cqw;margin-top:3cqw;color:#fffce5;font-size:8.5cqw;font-weight:1000;text-shadow:0 2px 1px #348000,0 4px 5px #2e880038;white-space:nowrap}
-.bp-screen .bp-dismiss{position:fixed;right:max(14px,env(safe-area-inset-right));top:max(14px,env(safe-area-inset-top));z-index:3;display:grid;place-items:center;width:clamp(44px,9vw,62px);height:clamp(46px,9.3vw,64px);border:0!important;border-radius:50%;padding:0!important;background:transparent!important;box-shadow:none!important;appearance:none;-webkit-appearance:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.bp-screen .bp-dismiss{position:fixed;right:max(14px,var(--safe-right));top:max(14px,var(--safe-top));z-index:3;display:grid;place-items:center;width:clamp(44px,9vw,62px);height:clamp(46px,9.3vw,64px);border:0!important;border-radius:50%;padding:0!important;background:transparent!important;box-shadow:none!important;appearance:none;-webkit-appearance:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .bp-dismiss img{display:block;width:100%;height:100%;pointer-events:none}
 .bp-dismiss:active{transform:translateY(3px);filter:brightness(.9)}
 .bp-sr{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
@@ -1488,6 +1488,8 @@ body.dark * { color-scheme: light; }
 
 .hp-home[hidden] { display: none; }
 .hp-home {
+  --home-height: calc(100dvh - var(--safe-top) - var(--safe-bottom));
+  padding: var(--safe-top) var(--safe-right) var(--safe-bottom) var(--safe-left);
   position: fixed;
   inset: 0;
   z-index: 50;
@@ -1503,8 +1505,7 @@ body.dark * { color-scheme: light; }
   align-self: center;
   display: grid;
   justify-items: center;
-  width: min(100%, calc(100dvh * 941 / 1672), 960px);
-  min-width: min(100%, 235px);
+  width: min(100%, calc(var(--home-height) * 941 / 1672), 960px);
   container-type: inline-size;
 }
 
@@ -1546,8 +1547,8 @@ body.dark * { color-scheme: light; }
 
 .hp-settings {
   position: absolute;
-  top: max(2.77cqw, env(safe-area-inset-top));
-  right: max(2.77cqw, env(safe-area-inset-right));
+  top: max(2.77cqw, var(--safe-top));
+  right: max(2.77cqw, var(--safe-right));
   z-index: 2;
   display: grid;
   place-items: center;
@@ -1664,7 +1665,7 @@ body.dark .hp-home::after {
 
 @media (orientation: landscape) {
   .hp-stage {
-    width: min(100%, calc(100dvh * 1.8), 1260px);
+    width: min(100%, calc(var(--home-height) * 1.8), 1260px);
     grid-template-columns: 1.1fr 1fr;
     grid-template-rows: 1fr auto;
     align-items: center;
@@ -1676,11 +1677,11 @@ body.dark .hp-home::after {
   .hp-action { position: relative; inset: auto; grid-area: 1 / 1 / 3; width: 100%; }
   .hp-logo { position: static; grid-area: 1 / 2; align-self: end; width: 100%; }
   .hp-cta { grid-area: 2 / 2; align-self: start; width: 88%; margin-top: 5%; }
-  .hp-settings { top: max(9px, env(safe-area-inset-top)); right: max(9px, env(safe-area-inset-right)); width: clamp(44px, 7cqw, 85px); }
+  .hp-settings { top: max(9px, var(--safe-top)); right: max(9px, var(--safe-right)); width: clamp(44px, 7cqw, 85px); }
 }
 
 
-body { background: #51ccf1 !important; }
+body { background: var(--sky-edge) !important; }
 
 /* The shared sky stays visible while the dialog replaces the screen below it. */
 :is(#homeScreen, #gameScreen, #settingsOverlay)[inert] { visibility: hidden; }
@@ -1696,9 +1697,13 @@ body { background: #51ccf1 !important; }
   container-type: size;
 }
 
-.bp-backdrop[data-theme='clouds'] {
-  background: radial-gradient(ellipse at 80% 5%, #fbf1c982 0, #fdf4d000 35%),
-    linear-gradient(162deg, #218bdb 0, #51ccf1 45%, #b5e9f6 68%, #ffd9ee 100%);
+.bp-backdrop[data-theme='clouds'] { background: var(--sky) var(--sky-edge); }
+.bp-backdrop::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: var(--sky-blend);
 }
 
 .bp-atmosphere {
@@ -1775,10 +1780,10 @@ html, body { overflow: hidden; overscroll-behavior: none; }
   place-items: center;
   grid-template: minmax(0, 1fr) / minmax(0, 1fr);
   margin: 0;
-  padding: max(var(--edge), env(safe-area-inset-top))
-    max(var(--edge), env(safe-area-inset-right))
-    max(var(--edge), env(safe-area-inset-bottom))
-    max(var(--edge), env(safe-area-inset-left));
+  padding: max(var(--edge), var(--safe-top))
+    max(var(--edge), var(--safe-right))
+    max(var(--edge), var(--safe-bottom))
+    max(var(--edge), var(--safe-left));
   overflow: clip;
 }
 
@@ -1953,8 +1958,8 @@ button.game-skin:focus-visible { outline: 3px solid #127f99; outline-offset: 2px
 }
 
 #overlay {
-  padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right))
-    max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+  padding: max(10px, var(--safe-top)) max(10px, var(--safe-right))
+    max(10px, var(--safe-bottom)) max(10px, var(--safe-left));
   overflow: clip;
 }
 
@@ -2020,9 +2025,9 @@ button.game-skin:focus-visible { outline: 3px solid #127f99; outline-offset: 2px
   display: grid !important;
   place-items: center;
   height: 100dvh;
-  padding: max(54px, calc(env(safe-area-inset-top) + 45px))
-    max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom))
-    max(10px, env(safe-area-inset-left)) !important;
+  padding: max(54px, calc(var(--safe-top) + 45px))
+    max(10px, var(--safe-right)) max(10px, var(--safe-bottom))
+    max(10px, var(--safe-left)) !important;
   overflow: clip !important;
   container-type: size;
 }
@@ -2039,8 +2044,8 @@ button.game-skin:focus-visible { outline: 3px solid #127f99; outline-offset: 2px
 
 @media (min-aspect-ratio: 6/5) and (max-height: 700px) {
   #settingsOverlay.bp-screen, #languageOverlay.bp-screen {
-    padding: max(8px, env(safe-area-inset-top)) max(55px, calc(env(safe-area-inset-right) + 50px))
-      max(8px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)) !important;
+    padding: max(8px, var(--safe-top)) max(55px, calc(var(--safe-right) + 50px))
+      max(8px, var(--safe-bottom)) max(10px, var(--safe-left)) !important;
   }
   .bp-screen .bp-stage {
     width: min(100%, 940px);
@@ -2427,9 +2432,9 @@ button.game-skin:focus-visible { outline: 3px solid #127f99; outline-offset: 2px
 
 .hp-toolbar {
   position: fixed;
-  top: max(2.77cqw, env(safe-area-inset-top));
-  left: max(2.77cqw, env(safe-area-inset-left));
-  right: max(2.77cqw, env(safe-area-inset-right));
+  top: max(2.77cqw, var(--safe-top));
+  left: max(2.77cqw, var(--safe-left));
+  right: max(2.77cqw, var(--safe-right));
   z-index: 2;
   display: flex;
   align-items: center;
@@ -2459,9 +2464,9 @@ button.game-skin:focus-visible { outline: 3px solid #127f99; outline-offset: 2px
 
 @media (orientation: landscape) and (max-height: 720px) {
   .hp-toolbar {
-    top: max(9px, env(safe-area-inset-top));
-    left: max(9px, env(safe-area-inset-left));
-    right: max(9px, env(safe-area-inset-right));
+    top: max(9px, var(--safe-top));
+    left: max(9px, var(--safe-left));
+    right: max(9px, var(--safe-right));
   }
   #homeProfileButton { width: clamp(62px, 9.8cqw, 119px); }
 }
@@ -2521,8 +2526,8 @@ body:has(#profileOverlay[open]) #homeScreen { visibility: hidden; }
   max-width: none;
   max-height: none;
   margin: 0;
-  padding: max(12px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right))
-    max(12px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+  padding: max(12px, var(--safe-top)) max(10px, var(--safe-right))
+    max(12px, var(--safe-bottom)) max(10px, var(--safe-left));
   border: 0;
   background: transparent;
   color: #964433;
@@ -2865,7 +2870,7 @@ body:has(#profileOverlay[open]) #homeScreen { visibility: hidden; }
   --cap: calc(var(--skin-height) / 2);
   position: absolute;
   z-index: 2;
-  right: max(1%, env(safe-area-inset-right));
+  right: max(1%, var(--safe-right));
   bottom: 25%;
   display: grid;
   place-items: center;
@@ -2909,7 +2914,7 @@ body:has(#profileOverlay[open]) #homeScreen { visibility: hidden; }
     position: fixed;
     right: auto;
     left: calc(50% - .75 * var(--skin-height));
-    bottom: max(12px, 4dvh, env(safe-area-inset-bottom));
+    bottom: max(12px, 4dvh, var(--safe-bottom));
   }
 }
 
@@ -2921,8 +2926,8 @@ body:has(#profileOverlay[open]) #homeScreen { visibility: hidden; }
   height: 100dvh;
   max-height: none;
   margin: 0;
-  padding: max(12px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right))
-    max(12px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+  padding: max(12px, var(--safe-top)) max(10px, var(--safe-right))
+    max(12px, var(--safe-bottom)) max(10px, var(--safe-left));
   border: 0;
   background: transparent;
   color: #964433;
@@ -3096,8 +3101,8 @@ body:has(#chestDialog[open]) :is(#homeScreen, #gameScreen) { visibility: hidden;
   height: 100dvh;
   max-height: none;
   margin: 0;
-  padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right))
-    max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+  padding: max(10px, var(--safe-top)) max(10px, var(--safe-right))
+    max(10px, var(--safe-bottom)) max(10px, var(--safe-left));
   border: 0;
   background: transparent;
   color: #b61042;
@@ -3572,11 +3577,11 @@ html[data-keyboard-navigation] :is(button, select):focus-visible:not(:is(.hint, 
   outline: 2px solid #874824 !important;
   outline-offset: -4px !important;
 }
-@font-face { font-family: BubbleNunito; src: url("assets/nunito-750.woff2?v=3.53-international.7") format("woff2"); font-weight: 750; font-display: swap; }
-@font-face { font-family: BubbleNunito; src: url("assets/nunito-900.woff2?v=3.53-international.7") format("woff2"); font-weight: 900; font-display: swap; }
-@font-face { font-family: "Bubble UI JA"; src: url("assets/ui-ja.woff2?v=3.53-international.7") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: BubbleNunito; src: url("assets/nunito-750.woff2?v=3.53-international.8") format("woff2"); font-weight: 750; font-display: swap; }
+@font-face { font-family: BubbleNunito; src: url("assets/nunito-900.woff2?v=3.53-international.8") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: "Bubble UI JA"; src: url("assets/ui-ja.woff2?v=3.53-international.8") format("woff2"); font-weight: 900; font-display: swap; }
 :lang(ja) { --port-cjk: "Bubble UI JA"; }
-@font-face { font-family: "Bubble UI KO"; src: url("assets/ui-ko.woff2?v=3.53-international.7") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: "Bubble UI KO"; src: url("assets/ui-ko.woff2?v=3.53-international.8") format("woff2"); font-weight: 900; font-display: swap; }
 :lang(ko) { --port-cjk: "Bubble UI KO"; }
-@font-face { font-family: "Bubble UI ZH"; src: url("assets/ui-zh-CN.woff2?v=3.53-international.7") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: "Bubble UI ZH"; src: url("assets/ui-zh-CN.woff2?v=3.53-international.8") format("woff2"); font-weight: 900; font-display: swap; }
 :lang(zh-CN) { --port-cjk: "Bubble UI ZH"; }

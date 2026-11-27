@@ -317,7 +317,7 @@ function getLevel(number) {
 
 const clone = value => JSON.parse(JSON.stringify(value));
 
-const GAME_VERSION = "3.53-international.7";
+const GAME_VERSION = "3.53-international.8";
 const CAMPAIGN_LEVEL_KEY = "bp_campaign_progress";
 const RANDOM_LEVEL_KEY = "bp_campaign_completed_random_level";
 const COMPLETED_LEVELS_KEY = "bp_campaign_release_completed";

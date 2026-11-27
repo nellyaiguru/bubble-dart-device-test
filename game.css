@@ -1415,7 +1415,7 @@ body.dark * { color-scheme: light; }
 
 
 
-@font-face{font-family:BubbleNunito;src:url("assets/bb55a5ca5c2042335b3991af.ttf") format('truetype');font-weight:200 1000;font-display:swap}
+
 /* All artwork is independent of copy. No bitmap contains menu text. */
 #languageOverlay.bp-screen,#settingsOverlay.bp-screen{position:fixed!important;inset:0!important;z-index:100;display:flex!important;align-items:center;justify-content:center;overflow:auto!important;overscroll-behavior:contain;padding:max(30px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(30px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))!important;background:transparent!important;backdrop-filter:none;box-sizing:border-box;color:#923f32;font-family:BubbleNunito, var(--port-cjk, sans-serif),'Trebuchet MS',sans-serif;color-scheme:light}
 #settingsOverlay.bp-screen{z-index:80}
@@ -3346,6 +3346,85 @@ body:has(#campaignFinale[open]) :is(#homeScreen, #gameScreen) { visibility: hidd
 
 #board, #board .cell, #gameScreen .game-header { user-select: none; -webkit-touch-callout: none; }
 
+#campaignFinale[open] {
+  padding: clamp(12px, 3vw, 24px);
+  overflow: auto;
+}
+#campaignFinale[aria-busy] .finale-layout { visibility: hidden; }
+
+#campaignFinale .finale-layout {
+  width: min(100%, 760px);
+  padding: 30px 0 0;
+  transform: none;
+}
+
+#campaignFinale .finale-panel {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(16px, 3vw, 32px);
+  padding: 52px clamp(26px, 5vw, 46px) 34px;
+}
+
+#campaignFinale .finale-panel::before {
+  border-width: 72px;
+  border-image-width: 72px;
+  inset: -7px;
+}
+
+#campaignFinale .finale-title {
+  left: 50%; top: -31px; transform: translateX(-50%);
+  width: min(88%, 530px);
+  height: auto; min-height: 64px;
+  padding: .52em 1em;
+  --cap: 32px;
+  font-size: clamp(24px, 4vw, 34px);
+  line-height: 1.12;
+}
+
+#campaignFinale .finale-art {
+  width: 100%; height: auto; max-height: min(40dvh, 245px);
+  object-fit: contain;
+  mask-image: linear-gradient(90deg, transparent, #000 6% 94%, transparent),
+    linear-gradient(transparent, #000 7% 93%, transparent);
+  mask-composite: intersect;
+}
+
+#campaignFinale .finale-actions { gap: 12px; }
+#campaignFinale .finale-copy { margin: 0; line-height: 1.22; }
+#campaignFinale #finaleInvite { color: #b61042; font-size: clamp(20px, 3.4vw, 28px); }
+#campaignFinale #finaleReplay { color: #82434a; font-size: clamp(15px, 2.7vw, 21px); }
+
+#campaignFinale #finaleContinue {
+  width: 100%; min-width: 0; height: auto; min-height: 53px;
+  margin-top: 5px; padding: .48em .7em;
+  --cap: 27px;
+  font-size: clamp(16px, 2.12vw, 20px); line-height: 1.16;
+}
+
+@media (max-width: 590px) and (orientation: portrait) {
+  #campaignFinale .finale-layout { width: min(100%, 390px); }
+  #campaignFinale .finale-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding: 40px 25px 25px;
+  }
+  #campaignFinale .finale-panel::before { border-width: 54px; border-image-width: 54px; }
+  #campaignFinale .finale-title { top: -28px; min-height: 56px; --cap: 28px; font-size: clamp(19px, 6vw, 25px); }
+  #campaignFinale .finale-art { max-height: min(32dvh, 204px); }
+  #campaignFinale .finale-actions { gap: 9px; }
+  #campaignFinale #finaleContinue { min-height: 48px; --cap: 24px; }
+}
+
+@media (max-height: 420px) and (orientation: landscape) {
+  #campaignFinale .finale-layout { width: min(100%, 680px); padding-top: 25px; }
+  #campaignFinale .finale-panel { padding: 38px 32px 23px; }
+  #campaignFinale .finale-title { top: -25px; min-height: 50px; --cap: 25px; font-size: min(28px, 7dvh); }
+  #campaignFinale .finale-copy { line-height: 1.15; }
+  #campaignFinale #finaleInvite { font-size: min(22px, 6.5dvh); }
+  #campaignFinale #finaleReplay { font-size: min(18px, 5.2dvh); }
+  #campaignFinale #finaleContinue { min-height: 42px; --cap: 21px; }
+}
+html { text-size-adjust: 100%; -webkit-text-size-adjust: 100%; }
 body {
   user-select: none;
   -webkit-user-select: none;
@@ -3363,8 +3442,9 @@ button { touch-action: manipulation; }
   min-width: 0; min-height: 42px; position: relative; padding: .38em .42em;
   border: 2px solid #eccdb6; border-radius: 13px; background: #fff2df;
   color: #704228; font: 800 clamp(13px, 4.3cqw, 17px) "BubbleNunito", var(--port-cjk, system-ui), sans-serif;
-  line-height: 1.2; overflow-wrap: normal; word-break: normal; hyphens: none; cursor: pointer;
+  line-height: 1.2; overflow-wrap: anywhere; text-wrap: balance; cursor: pointer;
 }
+.port-language-options .port-language > span { display: block; }
 .port-language-options .port-language[aria-checked="true"] {
   color: #fff; background: #288b57; border-color: #62be5e;
 }
@@ -3376,9 +3456,7 @@ button { touch-action: manipulation; }
 }
 #languageOverlay .bp-title { font-size: clamp(15px, 7.5cqw, 32px); }
 #languageOverlay #languageConfirm {
-  font-size: clamp(15px, 6.6cqw, 28px); height: clamp(42px, 16cqw, 64px); min-height: 42px;
   margin-top: 3px;
-  white-space: normal; overflow-wrap: normal; line-height: 1.15;
 }
 #victoryReward[hidden], #victoryRewardMessage[hidden], #port-save-status[hidden] { display: none !important; }
 #victoryReward {
@@ -3426,28 +3504,29 @@ button { touch-action: manipulation; }
   translate: -.07em 0; font-size: clamp(14px, 4.3cqw, 20px);
 }
 #profileOverlay #profilePrevious::after { rotate: -135deg; translate: .07em 0; }
-#profileOverlay .profile-nav:focus-visible { outline: 2px solid #176a76; outline-offset: 2px; }
-
-#board .tutorial-reflector { outline: 3px solid #fff1b2; outline-offset: -2px; }
-#board .tutorial-action--bounce {
+#board .tutorial-mechanic { outline: 3px solid #fff1b2; outline-offset: -2px; }
+#board .tutorial-shot {
   z-index: 2; outline: 3px solid #fff3ad; outline-offset: -2px;
   box-shadow: 0 0 0 2px #e57605, 0 0 15px 4px #ffc434;
 }
-#board .tutorial-action--bounce .arrow {
+#board .tutorial-shot .arrow {
   filter: drop-shadow(0 0 3px white) drop-shadow(0 0 8px #f99a00);
-  animation: bounceTutorialPulse 900ms ease-in-out infinite alternate;
+  animation: tutorialShotPulse 900ms ease-in-out infinite alternate;
 }
-@keyframes bounceTutorialPulse { from { scale: .92; } to { scale: 1.18; } }
-@media (prefers-reduced-motion: reduce) { #board .tutorial-action--bounce .arrow { animation: none; } }
+@keyframes tutorialShotPulse {
+  from { scale: .93; }
+  to { scale: 1.14; filter: drop-shadow(0 0 4px white) drop-shadow(0 0 11px #f99000); }
+}
+@media (prefers-reduced-motion: reduce) { #board .tutorial-shot .arrow { animation: none; } }
+.game-tutorial .tutorial-card { overflow-wrap: anywhere; text-wrap: pretty; }
+.game-tutorial:has(.tutorial-shot-guide:not([hidden])) .tutorial-card { width: min(206px, 47vw); }
+#gameScreen #board .cell { container-type: size; }
+#gameScreen #board .ball {
+  width: 78cqmin; height: 78cqmin; flex: none;
+}
 
 #chestDialog .chest-actions { display: grid; width: 100%; gap: clamp(4px, 1.2cqw, 8px); }
-#chestDialog .chest-actions .chest-action { margin-top: 0; white-space: normal; line-height: 1.08; }
-#chestDialog #chestClaimReward {
-  height: auto; min-height: clamp(42px, 11cqw, 64px);
-  padding: .5em max(13px, 5cqw);
-  font-size: clamp(13px, 3.9cqw, 21px); line-height: 1.17;
-}
-#chestClaimReward span { min-width: 0; overflow-wrap: anywhere; text-wrap: balance; }
+#chestDialog .chest-actions .chest-action { margin-top: 0; }
 #chestDialog #chestPrizeInfo { margin: 0; font-size: clamp(12px, 3.5cqw, 17px); text-wrap: balance; }
 #chestDialog[data-state="earned"] #chestAction { color: #90462f; text-shadow: none; }
 @media (min-aspect-ratio: 6/5) {
@@ -3463,9 +3542,41 @@ button { touch-action: manipulation; }
   .port-language-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .modal.victory .victory-pet { height: clamp(100px, 29dvh, 180px); }
 }
-@font-face { font-family: "Bubble UI JA"; src: url("assets/ui-ja.woff2?v=3.53-international.6") format("woff2"); font-weight: 100 900; font-display: swap; }
+
+/* Keep action labels the same size throughout the interface, including on narrow screens. */
+:root {
+  --action-font-size: clamp(18px, 4.8vmin, 26px);
+  --action-min-height: clamp(45px, 9vmin, 64px);
+}
+button[data-action-label] {
+  --cap: calc(var(--action-min-height) / 2) !important;
+  min-width: 0;
+  height: auto !important;
+  min-height: var(--action-min-height) !important;
+  padding: .48em clamp(12px, 4vmin, 24px) !important;
+  font: 900 var(--action-font-size)/1.18 "BubbleNunito", var(--port-cjk, system-ui), sans-serif !important;
+  letter-spacing: normal !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+button[data-action-label] > span { min-width: 0; }
+#tutorialOkay[data-action-label] { min-height: 0 !important; padding-block: .22em !important; }
+#campaignFinale .finale-title { overflow-wrap: anywhere; }
+#campaignFinale .finale-actions { min-width: 0; }
+
+html:not([data-keyboard-navigation]) button:focus-visible:not(:is(.hint, .route-origin, .tutorial-shot, .tutorial-mechanic)) {
+  outline: none !important;
+}
+html[data-keyboard-navigation] :is(button, select):focus-visible:not(:is(.hint, .route-origin, .tutorial-shot, .tutorial-mechanic)) {
+  outline: 2px solid #874824 !important;
+  outline-offset: -4px !important;
+}
+@font-face { font-family: BubbleNunito; src: url("assets/nunito-750.woff2?v=3.53-international.7") format("woff2"); font-weight: 750; font-display: swap; }
+@font-face { font-family: BubbleNunito; src: url("assets/nunito-900.woff2?v=3.53-international.7") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: "Bubble UI JA"; src: url("assets/ui-ja.woff2?v=3.53-international.7") format("woff2"); font-weight: 900; font-display: swap; }
 :lang(ja) { --port-cjk: "Bubble UI JA"; }
-@font-face { font-family: "Bubble UI KO"; src: url("assets/ui-ko.woff2?v=3.53-international.6") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Bubble UI KO"; src: url("assets/ui-ko.woff2?v=3.53-international.7") format("woff2"); font-weight: 900; font-display: swap; }
 :lang(ko) { --port-cjk: "Bubble UI KO"; }
-@font-face { font-family: "Bubble UI ZH"; src: url("assets/ui-zh-CN.woff2?v=3.53-international.6") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Bubble UI ZH"; src: url("assets/ui-zh-CN.woff2?v=3.53-international.7") format("woff2"); font-weight: 900; font-display: swap; }
 :lang(zh-CN) { --port-cjk: "Bubble UI ZH"; }

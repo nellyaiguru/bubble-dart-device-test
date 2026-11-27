@@ -1,6 +1,6 @@
 globalThis.bubbleConfig = {
   "target": "standalone-test",
-  "version": "3.53-international.4",
+  "version": "3.53-international.5",
   "loadingCopy": {
     "en": {
       "loading": "Loading game",

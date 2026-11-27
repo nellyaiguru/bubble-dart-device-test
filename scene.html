@@ -1,46 +1,5 @@
 
 
-<section id="homeScreen" class="hp-home" aria-label="Bubble Dart" aria-busy="true" hidden>
-  <div class="hp-stage">
-    <div class="hp-art">
-      <div class="hp-action" aria-hidden="true">
-        <img class="hp-piece hp-piece--kitten" src="assets/2a84fdfb5d616dc116f57e3d.webp" width="2305" height="2077" style="--sprite-x:1.17111256%; --sprite-y:16.26434507%; --sprite-width:74.98373455%" alt="" draggable="false">
-        <img class="hp-piece hp-piece--strike-purple" src="assets/e7e9d9bd28f951c76c5f2980.webp" width="2597" height="1936" style="--sprite-x:13.14248536%; --sprite-y:8.74554808%; --sprite-width:84.48275862%" alt="" draggable="false">
-        <img class="hp-piece hp-piece--arrow" src="assets/b896e5a9e978537fb8e0481d.webp" width="844" height="498" style="--sprite-x:48.30839297%; --sprite-y:31.65809260%; --sprite-width:27.45608328%" alt="" draggable="false">
-        <img class="hp-piece hp-piece--ball-blue" src="assets/d39f77b70ffa501b4bd64076.webp" width="336" height="341" style="--sprite-x:7.80741705%; --sprite-y:19.98417095%; --sprite-width:10.93038386%" alt="" draggable="false">
-        <img class="hp-piece hp-piece--ball-yellow" src="assets/7721f1f06dad5e32feb8759c.webp" width="251" height="252" style="--sprite-x:30.51398829%; --sprite-y:5.97546498%; --sprite-width:8.16525699%" alt="" draggable="false">
-        <img class="hp-piece hp-piece--ball-pink" src="assets/6fd6b49f1782acc12ae99a1e.webp" width="291" height="294" style="--sprite-x:58.03513338%; --sprite-y:1.82034032%; --sprite-width:9.46649317%" alt="" draggable="false">
-        <img class="hp-piece hp-piece--ball-green" src="assets/bc2afa1c40031ded29a41467.webp" width="212" height="215" style="--sprite-x:91.60702668%; --sprite-y:41.90740008%; --sprite-width:6.89655172%" alt="" draggable="false">
-        <img class="hp-piece hp-piece--ball-orange" src="assets/936abbb39459dea8adb4659a.webp" width="172" height="173" style="--sprite-x:18.37996096%; --sprite-y:86.66402849%; --sprite-width:5.59531555%" alt="" draggable="false">
-        <img class="hp-piece hp-piece--ball-turquoise" src="assets/986dea588c46b34f6bb6aec1.webp" width="404" height="407" style="--sprite-x:56.79895901%; --sprite-y:69.25207756%; --sprite-width:13.14248536%" alt="" draggable="false">
-      </div>
-      <img class="hp-logo" src="assets/1dd2cd20ab9d84c5d4e8fcd4.webp" width="1560" height="1008" alt="Bubble Dart">
-    </div>
-    <div class="hp-toolbar">
-      <button id="homeProfileButton" type="button" aria-haspopup="dialog"
-      aria-controls="profileOverlay" aria-label="" title=""><span id="homeProfileBadge" class="profile-badge" aria-hidden="true"><span class="profile-badge-mask"><img alt="" draggable="false"></span>
-    <img class="profile-badge-frame" alt="" draggable="false"></span></button>
-      <button id="homeSettingsButton" class="hp-settings settings-trigger" type="button" onclick="openSettings()"
-      aria-haspopup="dialog" aria-controls="settingsOverlay" aria-label="" data-l10n-label="settingsLabel" title="">
-      <img src="assets/a4470adf59cbbb919cbd9297.png" width="131" height="131" alt="">
-    </button>
-    </div>
-    <button id="homeChestButton" class="game-skin bp-cream" type="button"
-      aria-haspopup="dialog" aria-controls="chestDialog" aria-label="">
-      <img src="assets/74a7cb6e20794e8a2178419e.webp" alt="" draggable="false">
-      <span id="homeChestCount" class="hint-count" aria-hidden="true" hidden></span>
-    </button>
-    <div class="hp-cta">
-      <img class="hp-rays hp-rays-left" src="assets/9768b7a80cbcc47a1558fbe3.png" alt="" aria-hidden="true">
-      <img class="hp-rays hp-rays-right" src="assets/b662680076509377ff08beab.png" alt="" aria-hidden="true">
-      <button id="homeContinue" class="hp-play" type="button" onclick="resumeFromHome()">
-        <span class="hp-play-skin" aria-hidden="true"><span></span><span></span><span></span></span>
-        <span id="homeLevelLabel" class="hp-level-label"></span>
-      </button>
-    </div>
-  </div>
-</section>
-
 <main class="app" id="gameScreen" hidden>
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
@@ -217,9 +176,9 @@
     </div>
     <div class="profile-footer">
      <div id="profilePages" class="profile-pages" hidden>
-      <button id="profilePrevious" class="bp-pill bp-cream" type="button" aria-label="">‹</button>
+      <button id="profilePrevious" class="profile-nav" type="button" aria-label=""></button>
       <span id="profilePage" aria-live="polite"></span>
-      <button id="profileNext" class="bp-pill bp-cream" type="button" aria-label="">›</button>
+      <button id="profileNext" class="profile-nav" type="button" aria-label=""></button>
      </div>
      <button id="profileDone" class="bp-pill bp-green bp-confirm profile-save" type="submit"></button>
     </div>
@@ -253,7 +212,11 @@
    </div>
    <p id="chestCopy"></p>
    <p id="chestProgress"></p>
-   <button id="chestAction" class="bp-pill bp-green bp-confirm chest-action" type="button"></button>
+   <p id="chestPrizeInfo" hidden></p>
+   <div class="chest-actions">
+    <button id="chestClaimReward" data-l10n="claimReward" class="bp-pill bp-green bp-confirm chest-action" type="button" hidden></button>
+    <button id="chestAction" class="bp-pill bp-green bp-confirm chest-action" type="button"></button>
+   </div>
   </div>
  </div>
 </dialog>
@@ -308,7 +271,7 @@
   <div class="confetti-layer" id="confettiLayer" aria-hidden="true"></div>
   <div class="modal" id="resultModal">
     <h2 id="resultTitle"></h2>
-    <img loading="lazy" class="victory-pet" id="victoryPet" src="assets/211277c3a5c07167fd58890c.webp" alt="">
+    <img loading="lazy" class="victory-pet" id="victoryPet" alt="">
     <p id="resultText"></p>
     <button class="action primary game-skin bp-green" id="nextLevelAction" data-l10n="next" onclick="runNextLevel()"></button>
     <button class="action primary game-skin bp-green" id="victoryReward" type="button" hidden></button>

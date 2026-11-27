@@ -222,7 +222,7 @@ async function startBubbleDart() {
 
 function showStartupRetry() {
   const loading = document.getElementById("releaseLoading");
-  document.getElementById("releaseSplash").classList.add("splash-ready");
+  document.getElementById("homeScreen").classList.add("art-ready");
   loading.removeAttribute("role");
   loading.removeAttribute("aria-label");
   loading.dataset.loadFailed = "";

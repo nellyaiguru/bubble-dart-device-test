@@ -1582,7 +1582,7 @@ body.dark * { color-scheme: light; }
 .hp-rays-left { left: -8.62%; }
 .hp-rays-right { right: -8.20%; }
 
-.hp-play, .level-plaque {
+.hp-play {
   --play-left: url('assets/8e3ee5656d4b4afed1085bdb.png');
   --play-middle: url('assets/3955a6907fad05a4241038dd.png');
   --play-right: url('assets/65df55bea0be28d249e88ddf.png');
@@ -3444,7 +3444,11 @@ button { touch-action: manipulation; }
   color: #704228; font: 800 clamp(13px, 4.3cqw, 17px) "BubbleNunito", var(--port-cjk, system-ui), sans-serif;
   line-height: 1.2; overflow-wrap: anywhere; text-wrap: balance; cursor: pointer;
 }
-.port-language-options .port-language > span { display: block; }
+.port-language-options .port-language > span {
+  display: block;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
 .port-language-options .port-language[aria-checked="true"] {
   color: #fff; background: #288b57; border-color: #62be5e;
 }
@@ -3470,10 +3474,28 @@ button { touch-action: manipulation; }
   background: #fff4dd; color: #60422d; text-align: center;
 }
 .port-ui-label { overflow-wrap: anywhere; }
-#homeLevelLabel, #languageCurrent { white-space: normal; }
-#languageOpenButton { flex-wrap: wrap; align-content: center; gap: 0 .25em; line-height: 1.1; }
+#homeLevelLabel { white-space: normal; }
 .hp-level-label { font-family: "BubbleNunito", var(--port-cjk, system-ui), system-ui, sans-serif; }
-.bp-confirm, #soundToggle, #languageOpenButton { white-space: normal; overflow-wrap: anywhere; }
+.bp-confirm, #soundToggle { white-space: normal; overflow-wrap: anywhere; }
+
+#gameScreen #level {
+  padding-inline: clamp(8px, 3vmin, 20px);
+  border: 2px solid #f2cf9e;
+  border-radius: 999px;
+  background: #fff0d9;
+  color: #784632;
+  box-shadow: none;
+}
+#gameScreen #level .hp-level-label {
+  top: auto;
+  font-size: clamp(13px, min(13cqw, 49cqh), 32px);
+  line-height: 1.05;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
+  text-wrap: balance;
+  text-shadow: none;
+}
 
 #homeChestButton .hint-count, #gameScreen .hint-count {
   display: flex; align-items: center; justify-content: center;
@@ -3572,11 +3594,11 @@ html[data-keyboard-navigation] :is(button, select):focus-visible:not(:is(.hint, 
   outline: 2px solid #874824 !important;
   outline-offset: -4px !important;
 }
-@font-face { font-family: BubbleNunito; src: url("assets/nunito-750.woff2?v=3.53-international.7") format("woff2"); font-weight: 750; font-display: swap; }
-@font-face { font-family: BubbleNunito; src: url("assets/nunito-900.woff2?v=3.53-international.7") format("woff2"); font-weight: 900; font-display: swap; }
-@font-face { font-family: "Bubble UI JA"; src: url("assets/ui-ja.woff2?v=3.53-international.7") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: BubbleNunito; src: url("assets/nunito-750.woff2?v=3.53-international.9") format("woff2"); font-weight: 750; font-display: swap; }
+@font-face { font-family: BubbleNunito; src: url("assets/nunito-900.woff2?v=3.53-international.9") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: "Bubble UI JA"; src: url("assets/ui-ja.woff2?v=3.53-international.9") format("woff2"); font-weight: 900; font-display: swap; }
 :lang(ja) { --port-cjk: "Bubble UI JA"; }
-@font-face { font-family: "Bubble UI KO"; src: url("assets/ui-ko.woff2?v=3.53-international.7") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: "Bubble UI KO"; src: url("assets/ui-ko.woff2?v=3.53-international.9") format("woff2"); font-weight: 900; font-display: swap; }
 :lang(ko) { --port-cjk: "Bubble UI KO"; }
-@font-face { font-family: "Bubble UI ZH"; src: url("assets/ui-zh-CN.woff2?v=3.53-international.7") format("woff2"); font-weight: 900; font-display: swap; }
+@font-face { font-family: "Bubble UI ZH"; src: url("assets/ui-zh-CN.woff2?v=3.53-international.9") format("woff2"); font-weight: 900; font-display: swap; }
 :lang(zh-CN) { --port-cjk: "Bubble UI ZH"; }

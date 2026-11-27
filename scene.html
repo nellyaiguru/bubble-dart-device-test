@@ -59,8 +59,7 @@
       </button>
     </div>
     <div class="game-header-center">
-      <h1 class="level-plaque" id="level">
-        <span class="hp-play-skin" aria-hidden="true"><span></span><span></span><span></span></span>
+      <h1 id="level">
         <span id="gameLevelLabel" class="hp-level-label"></span>
       </h1>
       <div class="hearts game-skin bp-cream" id="hearts" role="img" aria-label=""></div>
@@ -240,7 +239,7 @@
  <div class="bp-stage"><img loading="lazy" class="bp-logo" alt="Bubble Dart" width="1560" height="1008" draggable="false"><div class="bp-dialog"><div class="bp-panel bp-settings-panel">
   <h2 class="bp-pill bp-pink bp-title" id="settingsTitle" data-l10n="settings"></h2>
   <div class="bp-field"><span class="bp-field-label" id="soundSectionLabel"><span id="soundSectionText" data-l10n="sound"></span></span><button class="bp-pill bp-cream" id="soundToggle" data-action-label type="button" onclick="toggleSound()" aria-pressed="true"></button></div>
-  <button class="bp-pill bp-cream" id="languageOpenButton" data-action-label type="button" aria-haspopup="dialog" aria-controls="languageOverlay" onclick="openLanguageDialog()"><span id="languageLabel" data-l10n="language"></span><span aria-hidden="true">&nbsp;·&nbsp;</span><span id="languageCurrent" class="notranslate" translate="no"></span></button>
+  <button class="bp-pill bp-cream" id="languageOpenButton" data-action-label data-l10n="language" type="button" aria-haspopup="dialog" aria-controls="languageOverlay" onclick="openLanguageDialog()"></button>
   <button class="bp-pill bp-green bp-confirm" id="settingsDone" data-action-label data-l10n="done" type="button" onclick="closeSettings()"></button>
  </div></div></div>
 </div>
@@ -253,7 +252,7 @@
 <button class="port-language notranslate" type="button" role="radio" lang="en" translate="no" data-language="en" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)"><span>English</span></button>
 <button class="port-language notranslate" type="button" role="radio" lang="ru" translate="no" data-language="ru" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)"><span>Русский</span></button>
 <button class="port-language notranslate" type="button" role="radio" lang="es" translate="no" data-language="es" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)"><span>Español</span></button>
-<button class="port-language notranslate" type="button" role="radio" lang="pt-BR" translate="no" data-language="pt-BR" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)"><span>Português (Brasil)</span></button>
+<button class="port-language notranslate" type="button" role="radio" lang="pt-BR" translate="no" data-language="pt-BR" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)"><span>Português</span></button>
 <button class="port-language notranslate" type="button" role="radio" lang="fr" translate="no" data-language="fr" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)"><span>Français</span></button>
 <button class="port-language notranslate" type="button" role="radio" lang="de" translate="no" data-language="de" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)"><span>Deutsch</span></button>
 <button class="port-language notranslate" type="button" role="radio" lang="tr" translate="no" data-language="tr" aria-checked="false" tabindex="-1" onclick="chooseLanguage(this.dataset.language)"><span>Türkçe</span></button>
